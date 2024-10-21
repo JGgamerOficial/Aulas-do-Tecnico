@@ -1,0 +1,106 @@
+#include <iostream>
+#include <cstdlib> // Para rand() e srand()
+#include <ctime>   // Para time()
+#include <string>  // Para trabalhar com strings
+#include <thread>  // Para usar sleep_for
+#include <chrono>  // Para definir a duração das pausas
+
+int main() {
+    std::string nomeJogador;    // Nome do jogador
+    std::string escolhaJogador; // Escolha de par ou ímpar
+    int jogadorNumero;          // Número escolhido pelo jogador
+    int computadorNumero;       // Número gerado pela IA (computador)
+    int soma;                   // Soma dos números
+    char jogarNovamente;        // Variável para saber se o jogador quer jogar de novo
+
+    // Pedir o nome do jogador e personalizar a interação
+    std::cout << "Qual é o seu nome, herói? ";
+    std::getline(std::cin, nomeJogador); // Captura o nome do jogador (inclusive espaços)
+
+    // Exibir a história com pausas
+    std::cout << "\nBem-vindo, " << nomeJogador << "!" << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(1)); // Pausa de 1 segundo
+    std::cout << "A IA mais poderosa do mundo quer dominar o planeta." << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(2)); // Pausa de 2 segundos
+    std::cout << "A única forma de impedir essa conquista é vencendo-a em um jogo de par ou ímpar!" << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(1)); // Pausa de 1 segundo
+    std::cout << "Você está pronto para salvar o mundo?\n\n";
+    std::this_thread::sleep_for(std::chrono::seconds(2)); // Pausa de 2 segundos
+
+    // Inicializar o gerador de números aleatórios
+    srand(time(0));
+
+    do {
+        // Inicializar os contadores de vitórias para cada nova rodada de melhor de 3
+        int vitoriasJogador = 0;    // Contador de vitórias do jogador
+        int vitoriasComputador = 0; // Contador de vitórias da IA (computador)
+
+        // Laço principal - melhor de 3
+        while (vitoriasJogador < 2 && vitoriasComputador < 2) {
+            // Laço para garantir que a entrada seja válida ("par" ou "ímpar")
+            do {
+                std::cout << nomeJogador << ", escolha 'par' ou 'ímpar': ";
+                std::cin >> escolhaJogador;
+
+                if (escolhaJogador != "par" && escolhaJogador != "ímpar") {
+                    std::cout << "Entrada inválida! Tente novamente." << std::endl;
+                }
+
+            } while (escolhaJogador != "par" && escolhaJogador != "ímpar");
+
+            // Laço para garantir que o número do jogador seja entre 0 e 9
+            do {
+                std::cout << "Digite um número entre 0 e 9: ";
+                std::cin >> jogadorNumero;
+
+                if (jogadorNumero < 0 || jogadorNumero > 9) {
+                    std::cout << "Número inválido! Tente novamente." << std::endl;
+                }
+
+            } while (jogadorNumero < 0 || jogadorNumero > 9);
+
+            // Gerar número aleatório para a IA
+            std::this_thread::sleep_for(std::chrono::seconds(1)); // Pausa de 1 segundo
+            computadorNumero = rand() % 10; // Número entre 0 e 9
+            std::cout << "A IA está pensando..." << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(2)); // Pausa de 2 segundos
+            std::cout << "A IA escolheu o número: " << computadorNumero << std::endl;
+
+            // Calcular a soma dos números
+            soma = jogadorNumero + computadorNumero;
+            std::this_thread::sleep_for(std::chrono::seconds(1)); // Pausa de 1 segundo
+            std::cout << "A soma dos números é: " << soma << std::endl;
+
+            // Verificar se a soma é par ou ímpar e comparar com a escolha do jogador
+            std::this_thread::sleep_for(std::chrono::seconds(1)); // Pausa de 1 segundo
+            if ((soma % 2 == 0 && escolhaJogador == "par") || (soma % 2 != 0 && escolhaJogador == "ímpar")) {
+                std::cout << "Parabéns, " << nomeJogador << "! Você venceu esta rodada!" << std::endl;
+                vitoriasJogador++; // Incrementa a vitória do jogador
+            } else {
+                std::this_thread::sleep_for(std::chrono::seconds(2)); // Pausa de 2 segundos
+                std::cout << "A IA venceu esta rodada!" << std::endl;
+                vitoriasComputador++; // Incrementa a vitória da IA
+            }
+
+            // Exibir o placar
+            std::cout << "Placar: " << nomeJogador << " " << vitoriasJogador << " - " << vitoriasComputador << " IA\n";
+            std::this_thread::sleep_for(std::chrono::seconds(1)); // Pausa de 1 segundo
+        }
+
+        // Verificar quem venceu o melhor de 3
+        if (vitoriasJogador == 2) {
+            std::cout << "Parabéns, " << nomeJogador << "! Você venceu o melhor de 3 e salvou o mundo!" << std::endl;
+        } else {
+            std::cout << "A IA venceu o melhor de 3! O mundo está sob seu controle..." << std::endl;
+        }
+
+        // Perguntar se o jogador quer jogar novamente
+        std::cout << "\nDeseja jogar novamente? (s/n): ";
+        std::cin >> jogarNovamente;
+
+    } while (jogarNovamente == 's' || jogarNovamente == 'S'); // Repete o jogo se o jogador escolher 's'
+
+    std::cout << "Obrigado por jogar! Até a próxima!" << std::endl;
+
+    return 0;
+}
