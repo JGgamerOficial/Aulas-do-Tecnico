@@ -1,0 +1,67 @@
+#include <stdio.h>
+
+int main() {
+    int operador;
+    float numero1, numero2, resultado;
+
+    do {
+        // Mostrando o menu de opções para o usuário
+        printf("-- Menu --\n");
+        printf("1 - Soma\n");
+        printf("2 - Subtracao\n");
+        printf("3 - Multiplicacao\n");
+        printf("4 - Divisao\n");
+        printf("5 - Encerrar\n");
+        
+        // Lendo a opção escolhida pelo usuário
+        scanf("%d", &operador);
+
+        // Verificação se o operador está entre 1 e 4 (válido)
+        if (operador >= 1 && operador <= 4) {
+            // Apenas se a opção for válida, pedimos os números
+            printf("Digite o primeiro numero: ");
+            scanf("%f", &numero1);
+            printf("Digite o segundo numero: ");
+            scanf("%f", &numero2);
+
+            // Realizando a operação conforme a escolha do usuário
+            switch(operador) {
+                case 1:
+                    // Soma
+                    resultado = numero1 + numero2;
+                    printf("Resultado da operacao Soma entre %.2f e %.2f: %.2f\n", numero1, numero2, resultado);
+                    break;
+                case 2:
+                    // Subtração
+                    resultado = numero1 - numero2;
+                    printf("Resultado da operacao Subtracao entre %.2f e %.2f: %.2f\n", numero1, numero2, resultado);
+                    break;
+                case 3:
+                    // Multiplicação
+                    resultado = numero1 * numero2;
+                    printf("Resultado da operacao Multiplicacao entre %.2f e %.2f: %.2f\n", numero1, numero2, resultado);
+                    break;
+                case 4:
+                    // Divisão, verificando se o segundo número é diferente de zero
+                    if (numero2 != 0) {
+                        resultado = numero1 / numero2;
+                        printf("Resultado da operacao Divisao entre %.2f e %.2f: %.2f\n", numero1, numero2, resultado);
+                    } else {
+                        // Tratamento para erro de divisão por zero
+                        printf("Erro: Divisao por zero nao permitida.\n");
+                    }
+                    break;
+            }
+        } else if (operador != 5) {
+            // Se o operador não for 5 (que encerra o programa), exibir mensagem de erro para operadores inválidos
+            printf("Opcao invalida! Por favor, escolha uma opcao valida.\n");
+        }
+
+    // Repetir o menu até que o usuário escolha a opção 5 para encerrar o programa
+    } while (operador != 5);
+
+    // Mensagem de encerramento quando o usuário escolhe 5
+    printf("Encerrando calculadora!\n");
+
+    return 0;
+}
