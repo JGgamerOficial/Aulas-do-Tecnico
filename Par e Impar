@@ -14,17 +14,17 @@ int main() {
     char jogarNovamente;        // Variável para saber se o jogador quer jogar de novo
 
     // Pedir o nome do jogador e personalizar a interação
-    std::cout << "Qual é o seu nome, herói? ";
+    std::cout << "Qual é o seu nome, herói do Grêmio? ";
     std::getline(std::cin, nomeJogador); // Captura o nome do jogador (inclusive espaços)
 
     // Exibir a história com pausas
     std::cout << "\nBem-vindo, " << nomeJogador << "!" << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(1)); // Pausa de 1 segundo
-    std::cout << "A IA mais poderosa do mundo quer dominar o planeta." << std::endl;
+    std::cout << "Você está prestes a enfrentar a IA mais poderosa do mundo!" << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(2)); // Pausa de 2 segundos
-    std::cout << "A única forma de impedir essa conquista é vencendo-a em um jogo de par ou ímpar!" << std::endl;
+    std::cout << "Se vencer, o Grêmio será consagrado. Mas, se perder, o Inter triunfará." << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(1)); // Pausa de 1 segundo
-    std::cout << "Você está pronto para salvar o mundo?\n\n";
+    std::cout << "Está pronto para esta batalha épica? Que o destino do Grêmio esteja em suas mãos!\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(2)); // Pausa de 2 segundos
 
     // Inicializar o gerador de números aleatórios
@@ -89,9 +89,9 @@ int main() {
 
         // Verificar quem venceu o melhor de 3
         if (vitoriasJogador == 2) {
-            std::cout << "Parabéns, " << nomeJogador << "! Você venceu o melhor de 3 e salvou o mundo!" << std::endl;
+            std::cout << "Parabéns, " << nomeJogador << "! Você venceu o melhor de 3 e consagrou o Grêmio como campeão!" << std::endl;
         } else {
-            std::cout << "A IA venceu o melhor de 3! O mundo está sob seu controle..." << std::endl;
+            std::cout << "A IA venceu o melhor de 3! O Inter triunfa e domina a vitória..." << std::endl;
         }
 
         // Perguntar se o jogador quer jogar novamente
